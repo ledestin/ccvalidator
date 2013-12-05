@@ -3,8 +3,7 @@ ccvalidator
 
 Credit card validator
 
-Run
+To run tests type:
 ```
 make
 ```
-to run tests.
