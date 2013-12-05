@@ -40,12 +40,9 @@ module CreditCardValidator
   end
 
   def self.pretty_sprint card_no
+    card_no = strip_space card_no
     sprintf(PRETTY_SPRINT_FORMAT, "#{detect_type(card_no)}: #{card_no}",
       valid_checksum?(card_no) ? 'valid' : 'invalid')
-  end
-
-  def self.strip_and_sprint card_no
-    pretty_sprint strip_space(card_no)
   end
 
   def self.strip_space card_no
@@ -59,6 +56,6 @@ end
 
 if $0 == __FILE__
   $stdin.each { |line|
-    puts CreditCardValidator.strip_and_sprint line
+    puts CreditCardValidator.pretty_sprint line
   }
 end
