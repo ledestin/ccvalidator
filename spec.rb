@@ -9,7 +9,7 @@ describe CreditCardValidator do
       good_samples = [
 	[AMEX, ['345619951443234', '378282246310005']],
 	[DISCOVER, ['6011441767753254']],
-	[MASTERCARD,
+	[MASTER_CARD,
 	  ['5105105105105100', '5292228741833761', '5353484808994550',
 	  '5407295136975467', '5526986578615266']],
 	[VISA, ['4111111111111111', '4024007193564']]
@@ -24,16 +24,16 @@ describe CreditCardValidator do
       }
     end
 
-    it "detects other card types as `Unknown'" do
-      CreditCardValidator.detect_type('3096404751923148').should == 'Unknown'
+    it "detects other card types as unknown" do
+      CreditCardValidator.detect_type('3096404751923148').should == :unknown
     end
 
-    it "detects shorter card number length as `Unknown'" do
-      CreditCardValidator.detect_type('411111111111111').should == 'Unknown'
+    it "detects shorter card number length as unknown" do
+      CreditCardValidator.detect_type('411111111111111').should == :unknown
     end
 
-    it "detects longer card number length as `Unknown'" do
-      CreditCardValidator.detect_type('41111111111111122').should == 'Unknown'
+    it "detects longer card number length as unknown" do
+      CreditCardValidator.detect_type('41111111111111122').should == :unknown
     end
   end
 
