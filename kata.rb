@@ -21,17 +21,14 @@ module CreditCardValidator
   PRETTY_SPRINT_FORMAT = "%-#{PRETTY_SPRINT_PART1_LENGTH}s (%s)"
 
   def self.calc_checksum card_no
-    double, sum = true, 0
-    sum += card_no[-1].to_i
-    (card_no.size - 2).downto(0) { |i|
-      n = card_no[i].to_i
+    double = false
+    card_no.chars.map(&:to_i).reverse.inject(0) { |sum, n|
       n *= 2 if double
       double = !double
       next sum += n if n < 10
 
       sum += n.to_s.chars.map(&:to_i).inject(0, :+)
     }
-    sum
   end
 
   def self.detect_type card_no
