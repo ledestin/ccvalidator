@@ -56,11 +56,13 @@ describe CreditCardValidator do
       CreditCardValidator.valid_checksum?('41111111111111111').should == false
     end
   end
+end
 
+describe CreditCardValidator do
   describe '#strip' do
     it 'strips whitespace' do
       card_no = "		4408  0412   3456 7893 \n"
-      CreditCardValidator.strip_space(card_no).should == '4408041234567893'
+      CreditCardFormatter.strip_space(card_no).should == '4408041234567893'
     end
   end
 
@@ -78,7 +80,7 @@ describe CreditCardValidator do
 
     it 'prints card stats' do
       @data.each { |card_no, result|
-	CreditCardValidator.pretty_sprint(card_no).should == result
+	CreditCardFormatter.pretty_sprint(card_no).should == result
       }
     end
   end

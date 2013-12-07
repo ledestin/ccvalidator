@@ -16,10 +16,6 @@ module CreditCardValidator
     CardType.new('MasterCard', /^5[1-5]/, [16]),
     CardType.new('VISA', /^4/, [13, 16])]
 
-  PRETTY_SPRINT_PART1_LENGTH = CARD_TYPES.map { |c| c.name.size }.max + 2 +
-    CARD_TYPES.map { |c| c.lengths.max }.max
-  PRETTY_SPRINT_FORMAT = "%-#{PRETTY_SPRINT_PART1_LENGTH}s (%s)"
-
   def self.calc_checksum card_no
     double = false
     card_no.chars.map(&:to_i).reverse.inject(0) { |sum, n|
@@ -36,23 +32,31 @@ module CreditCardValidator
     found ? found.name : 'Unknown'
   end
 
-  def self.pretty_sprint card_no
-    card_no = strip_space card_no
-    sprintf(PRETTY_SPRINT_FORMAT, "#{detect_type(card_no)}: #{card_no}",
-      valid_checksum?(card_no) ? 'valid' : 'invalid')
-  end
-
-  def self.strip_space card_no
-    card_no.gsub /\s+/, ''
-  end
-
   def self.valid_checksum? card_no
     calc_checksum(card_no) % 10 == 0
   end
 end
 
+module CreditCardFormatter
+  PRETTY_SPRINT_PART1_LENGTH =
+    CreditCardValidator::CARD_TYPES.map { |c| c.name.size }.max + 2 +
+    CreditCardValidator::CARD_TYPES.map { |c| c.lengths.max }.max
+  PRETTY_SPRINT_FORMAT = "%-#{PRETTY_SPRINT_PART1_LENGTH}s (%s)"
+
+  def self.pretty_sprint card_no
+    card_no = strip_space card_no
+    sprintf(PRETTY_SPRINT_FORMAT,
+      "#{CreditCardValidator::detect_type(card_no)}: #{card_no}",
+      CreditCardValidator.valid_checksum?(card_no) ? 'valid' : 'invalid')
+  end
+
+  def self.strip_space card_no
+    card_no.gsub /\s+/, ''
+  end
+end
+
 if $0 == __FILE__
   $stdin.each { |line|
-    puts CreditCardValidator.pretty_sprint line
+    puts CreditCardFormatter.pretty_sprint line
   }
 end
