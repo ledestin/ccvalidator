@@ -38,8 +38,8 @@ module CreditCardValidator
 end
 
 module CreditCardFormatter
-  PRINTABLE_CARD_TYPES = { amex: 'AMEX', discover: 'Discover',
-    master_card: 'MasterCard', visa: 'VISA', unknown: 'Unknown' }
+  PRINTABLE_CARD_TYPES = Hash.new('Unknown').merge!({ amex: 'AMEX',
+    discover: 'Discover', master_card: 'MasterCard', visa: 'VISA' })
   PRETTY_SPRINT_PART1_LENGTH =
     PRINTABLE_CARD_TYPES.values.map { |name| name.size }.max + 2 +
     CreditCardValidator::CARD_TYPES.map { |c| c.lengths.max }.max
