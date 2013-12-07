@@ -3,7 +3,7 @@ require './kata'
 describe CreditCardValidator do
   describe '#detect_type' do
     context 'detect all card types' do
-      CreditCardValidator::CARDS.each { |card|
+      CreditCardValidator::CARD_TYPES.each { |card|
 	eval "#{card.name.upcase} = card"
       }
       good_samples = [
