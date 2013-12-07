@@ -2,7 +2,7 @@
 
 module CreditCardValidator
   CardType = Struct.new(:name, :starts_with, :lengths) do
-    def match? card_no
+    def matches? card_no
       lengths.include?(card_no.size) && card_no =~ starts_with
     end
 
@@ -35,7 +35,7 @@ module CreditCardValidator
   end
 
   def self.detect_type card_no
-    found = CARD_TYPES.find { |card| card.match? card_no }
+    found = CARD_TYPES.find { |card| card.matches? card_no }
     found ? found.name : 'Unknown'
   end
 
