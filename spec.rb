@@ -97,10 +97,10 @@ end
 
 # {{{1 String
 describe String do
-  describe '#strip_space' do
-    it 'strips whitespace' do
+  describe '#strip_all' do
+    it 'strips all whitespace' do
       str = " \t4408  0412   3456 7893 \n"
-      str.strip_space.should == '4408041234567893'
+      str.strip_all.should == '4408041234567893'
     end
   end
 end

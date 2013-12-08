@@ -52,7 +52,7 @@ module CreditCardFormatter
   end
 
   def self.pretty_sprint card_no
-    card_no = card_no.strip_space
+    card_no = card_no.strip_all
     type = printable_type CreditCardValidator::detect_type(card_no)
     sprintf(PRETTY_SPRINT_FORMAT, "#{type}: #{card_no}",
       CreditCardValidator.valid_checksum?(card_no) ? 'valid' : 'invalid')
@@ -61,7 +61,7 @@ end
 
 # {{{1 String
 class String
-  def strip_space
+  def strip_all
     gsub /\s+/, ''
   end
 end
