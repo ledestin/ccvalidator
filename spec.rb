@@ -59,7 +59,7 @@ describe CreditCardValidator do
 end
 
 describe CreditCardFormatter do
-  describe '#strip' do
+  describe '#strip_space' do
     it 'strips whitespace' do
       card_no = "		4408  0412   3456 7893 \n"
       CreditCardFormatter.strip_space(card_no).should == '4408041234567893'
