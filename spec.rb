@@ -58,7 +58,7 @@ describe CreditCardValidator do
   end
 end
 
-describe CreditCardValidator do
+describe CreditCardFormatter do
   describe '#strip' do
     it 'strips whitespace' do
       card_no = "		4408  0412   3456 7893 \n"
