@@ -1,5 +1,6 @@
 require './kata'
 
+# {{{1 CreditCardValidator
 describe CreditCardValidator do
   describe '#detect_type' do
     context 'detect all card types' do
@@ -58,6 +59,7 @@ describe CreditCardValidator do
   end
 end
 
+# {{{1 CreditCardFormatter
 describe CreditCardFormatter do
   describe '#strip_space' do
     it 'strips whitespace' do

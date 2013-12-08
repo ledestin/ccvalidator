@@ -1,5 +1,6 @@
 #!/usr/bin/ruby1.9.3
 
+# {{{1 CreditCardValidator
 module CreditCardValidator
   CardType = Struct.new(:name, :starts_with, :lengths) do
     def matches? card_no
@@ -37,6 +38,7 @@ module CreditCardValidator
   end
 end
 
+# {{{1 CreditCardFormatter
 module CreditCardFormatter
   PRINTABLE_CARD_TYPES = Hash.new('Unknown').merge!({ amex: 'AMEX',
     discover: 'Discover', master_card: 'MasterCard', visa: 'VISA' })
@@ -61,6 +63,7 @@ module CreditCardFormatter
   end
 end
 
+# {{{1 CLI
 if $0 == __FILE__
   $stdin.each { |line|
     puts CreditCardFormatter.pretty_sprint line
