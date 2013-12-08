@@ -52,7 +52,6 @@ module CreditCardFormatter
   end
 
   def self.pretty_sprint card_no
-    card_no = card_no.strip_all
     type = printable_type CreditCardValidator::detect_type(card_no)
     sprintf(PRETTY_SPRINT_FORMAT, "#{type}: #{card_no}",
       CreditCardValidator.valid_checksum?(card_no) ? 'valid' : 'invalid')
@@ -73,6 +72,7 @@ end
 # {{{1 CLI
 if $0 == __FILE__
   $stdin.each { |line|
+    line.strip_all!
     puts CreditCardFormatter.pretty_sprint line
   }
 end
