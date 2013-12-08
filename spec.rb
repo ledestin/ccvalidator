@@ -97,10 +97,27 @@ end
 
 # {{{1 String
 describe String do
+  before :all do
+    @str_stripped = '4408041234567893'
+  end
+
+  before :each do
+    @str = " \t4408  0412   3456 7893 \n"
+  end
+
   describe '#strip_all' do
     it 'strips all whitespace' do
-      str = " \t4408  0412   3456 7893 \n"
-      str.strip_all.should == '4408041234567893'
+      @str.strip_all.should == @str_stripped
+    end
+  end
+
+  describe '#strip_all!' do
+    it 'strips whitespace from itself' do
+      @str.strip_all!.should == @str_stripped
+    end
+
+    it "returns nil if there's nothing to strip" do
+      ''.strip_all!.should == nil
     end
   end
 end

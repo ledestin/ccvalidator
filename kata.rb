@@ -64,6 +64,10 @@ class String
   def strip_all
     gsub /\s+/, ''
   end
+
+  def strip_all!
+    gsub! /\s+/, ''
+  end
 end
 
 # {{{1 CLI
