@@ -61,13 +61,6 @@ end
 
 # {{{1 CreditCardFormatter
 describe CreditCardFormatter do
-  describe '#strip_space' do
-    it 'strips whitespace' do
-      card_no = "		4408  0412   3456 7893 \n"
-      CreditCardFormatter.strip_space(card_no).should == '4408041234567893'
-    end
-  end
-
   describe '#pretty_sprint' do
     before :all do
       @data = { '4111111111111111' => 'VISA: 4111111111111111       (valid)',
@@ -98,6 +91,16 @@ describe CreditCardFormatter do
 
     it "returns `Unknown' for :unknown type" do
       CreditCardFormatter.printable_type(:unknown) == 'Unknown'
+    end
+  end
+end
+
+# {{{1 String
+describe String do
+  describe '#strip_space' do
+    it 'strips whitespace' do
+      str = " \t4408  0412   3456 7893 \n"
+      str.strip_space.should == '4408041234567893'
     end
   end
 end
