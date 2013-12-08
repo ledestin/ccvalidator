@@ -45,9 +45,13 @@ module CreditCardFormatter
     CreditCardValidator::CARD_TYPES.map { |c| c.lengths.max }.max
   PRETTY_SPRINT_FORMAT = "%-#{PRETTY_SPRINT_PART1_LENGTH}s (%s)"
 
+  def self.printable_type card_type
+    PRINTABLE_CARD_TYPES[card_type]
+  end
+
   def self.pretty_sprint card_no
     card_no = strip_space card_no
-    type = PRINTABLE_CARD_TYPES[CreditCardValidator::detect_type(card_no)]
+    type = printable_type CreditCardValidator::detect_type(card_no)
     sprintf(PRETTY_SPRINT_FORMAT, "#{type}: #{card_no}",
       CreditCardValidator.valid_checksum?(card_no) ? 'valid' : 'invalid')
   end

@@ -84,4 +84,18 @@ describe CreditCardFormatter do
       }
     end
   end
+
+  describe '#printable_type' do
+    it 'returns well known card type (AMEX)' do
+      CreditCardFormatter.printable_type(:amex).should == 'AMEX'
+    end
+
+    it "returns `Unknown' for a card type not in the list" do
+      CreditCardFormatter.printable_type('!!!'.to_sym) == 'Unknown'
+    end
+
+    it "returns `Unknown' for :unknown type" do
+      CreditCardFormatter.printable_type(:unknown) == 'Unknown'
+    end
+  end
 end
